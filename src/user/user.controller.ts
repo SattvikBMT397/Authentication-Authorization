@@ -56,7 +56,7 @@ async update(
 }
 
 
-    @Patch(':id/status')
+    @Patch(':id/status') 
     @Roles(Role.ADMIN)
     async updateStatus(
         @Param('id') userId: number,
@@ -73,5 +73,10 @@ async update(
             throw new HttpException(ERROR_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
         }
         return this.userService.remove(user.id);
+    }
+    @Patch(':id/restore')
+    @Roles(Role.ADMIN)
+    async restoreUser(@Param('id') id: number): Promise<{ message: string }> {
+        return this.userService.restoreUser(id);
     }
 }

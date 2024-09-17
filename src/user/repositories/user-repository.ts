@@ -128,4 +128,23 @@ export class UserRepository {
             throw new InternalServerErrorException(error.message);
         }
     }
+    async restoreUser(id: Number): Promise<{ message: string }> {
+        try{
+        const result = await this.repository.restore(Number(id));
+        console.log(result, "result");
+    
+        if (result.affected === 0) {
+          throw new NotFoundException(`User with ID ${id} not found or not soft-deleted.`);
+        }
+        return { message: `User with ID ${id} has been successfully restored.` };
+    }
+    catch (error) {
+        if (error instanceof NotFoundException) {
+            throw error; // Re-throw the not found exception
+        }
+
+        // Handle any other errors
+        throw new InternalServerErrorException('An error occurred while restoring the user.');
+    }
+};
 }

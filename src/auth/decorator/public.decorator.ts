@@ -6,3 +6,7 @@ export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 
 export const ROLES_KEY = 'roles';
 export const Roles = (...roles: Role[]) => SetMetadata(ROLES_KEY, roles);
+
+export const  Permission_ROLES_KEY = 'permissions';
+export const Permissions = (...permissions: string[]) => SetMetadata(ROLES_KEY, permissions);
+

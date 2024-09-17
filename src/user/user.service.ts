@@ -119,4 +119,8 @@ export class UserService {
             throw new InternalServerErrorException(error.message);
         }
     }
+
+    async restoreUser(id: number) {
+        return this.userRepository.restoreUser(id); 
+    }
 }
